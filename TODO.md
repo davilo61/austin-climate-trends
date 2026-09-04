@@ -35,11 +35,12 @@ A checklist for keeping the Austin climate analysis project reproducible, polish
 ## Future public-facing features
 
 - [x] Choose a lightweight web stack for a simple Austin climate landing page: static GitHub Pages site with HTML, CSS, and vanilla JavaScript.
-- [ ] Build a summary page with annual temperature anomaly findings.
-- [ ] Add annual nighttime low and summer nighttime low trend charts.
-- [ ] Add precipitation anomaly visuals and explanatory text.
-- [ ] Add unit toggles for Celsius/Fahrenheit if the site is user-facing.
-- [ ] Add source notes, baseline dates, station information, and data coverage details.
+- [x] Choose a lightweight web stack for a simple Austin climate landing page: static GitHub Pages site with HTML, CSS, and vanilla JavaScript.
+- [x] Build a summary page with annual temperature anomaly findings.
+- [x] Add annual nighttime low and summer nighttime low trend charts.
+- [x] Add precipitation anomaly visuals and explanatory text.
+- [x] Add unit toggles for Celsius/Fahrenheit if the site is user-facing.
+- [x] Add source notes, baseline dates, station information, and data coverage details.
 - [ ] Prepare exportable PNG charts and CSV summaries for reuse in posts or presentations.
 - [ ] Design a social-media-friendly chart template for Austin climate summaries.
 

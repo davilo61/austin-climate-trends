@@ -94,6 +94,10 @@ The project also counts days when the daily maximum temperature (`tmax`) reaches
 
 The planned climate landing page will use a static GitHub Pages site built with HTML, CSS, and vanilla JavaScript. The existing PNG charts can be reused directly, and a static site keeps hosting and maintenance simple while leaving room for responsive layout, unit toggles, and lightweight chart interactions later.
 
+The first site version is in `docs/` and is ready for GitHub Pages deployment. Configure GitHub Pages to publish from the `main` branch and the `/docs` folder. To preview it locally, run `python -m http.server 8000 --directory docs` and open `http://localhost:8000/`.
+
+The site includes a summary page, the annual temperature, nighttime-low, summer-nighttime-low, precipitation, and 100°F-days charts, responsive mobile styling, a Celsius/Fahrenheit trend control, and source, baseline, coverage, and limitation notes.
+
 ## Run the analysis
 
 1. Create and activate a Python environment.
