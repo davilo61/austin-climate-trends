@@ -1,57 +1,52 @@
 # Project TODO
 
-A progress checklist for turning the Austin climate analysis into a public project.
+A checklist for keeping the Austin climate analysis project reproducible, polished, and publication-ready.
 
-## Repository and GitHub
+## Immediate priorities
 
-- [x] Focus the repository on Austin weather data.
-- [x] Document the Austin data files and analysis notebook in `README.md`.
-- [x] Add sample output images to `README.md`.
-- [x] Document the analysis baseline, units, and limitations in `README.md`.
-- [x] Add a `.gitignore` for `.venv/`, notebook checkpoints, Python caches, and local environment files.
-- [ ] Review the repository before the first commit.
-- [ ] Create the initial Git commit.
-- [ ] Create a GitHub repository and push the project.
-- [ ] Add the data source and retrieval date to the project documentation.
-- [ ] Confirm that generated charts and the notebook render correctly on GitHub.
+- [x] Define the project scope around Austin weather observations and climate trend analysis.
+- [x] Write the project overview and setup instructions in `README.md`.
+- [x] Add sample output charts to the repository and document their purpose.
+- [x] Add a Python environment ignore configuration for local tooling and caches.
+- [x] Review the repository and create an initial commit.
+- [x] Create a public GitHub repository and push the project.
+- [x] Verify that the project installs cleanly from a fresh environment using `requirements.txt`.
+- [x] Confirm that the notebooks run end-to-end without manual fixes.
+- [x] Document the exact data source, retrieval date, and station metadata in a single place.
+- [x] Keep `data/historical_weather_austin_sample.csv` as a legacy/reference file and document that it is not the active analysis dataset.
 
-## Data and analysis
+## Data quality and reproducibility
 
-- [ ] Decide whether `data/historical_weather_austin_sample.csv` is still needed alongside the daily dataset.
-- [ ] Add a reproducible script or notebook instructions for regenerating every output image.
-- [ ] Add checks for missing dates, missing `tmin` values, partial years, and duplicate observations.
-- [ ] Document that trend results are descriptive and based on one station.
-- [ ] Consider adding statistical uncertainty, confidence intervals, or a non-parametric trend test.
-- [ ] Refresh the data periodically and record the update date.
+- [x] Add a validation step for missing dates, duplicated rows, and missing `tmin`/temperature values.
+- [x] Document the analysis baseline and how anomaly values are calculated.
+- [x] Add a script or clear notebook instructions for re-generating all output charts.
+- [x] Record the date of the most recent data refresh and when it was last reviewed.
+- [x] Add a note that results are descriptive and based on a single weather station, not a full regional assessment.
+- [x] Consider a small statistical add-on such as confidence intervals or a trend test.
+- [x] Add an annual chart counting days with daily maximum temperatures of at least 100°F for the 40 complete years from 1986 through 2025.
 
-## Austin climate website
+## Project polish
 
-- [ ] Choose a web stack and create a minimal deployable site.
-- [ ] Build an overview page with the main Austin temperature findings.
-- [ ] Display annual temperature anomaly trends.
-- [ ] Display annual nighttime low and summer nighttime low trends.
-- [ ] Display precipitation anomalies.
-- [ ] Add a Fahrenheit/Celsius toggle.
-- [ ] Add chart source notes, baseline dates, station information, and data coverage.
-- [ ] Add downloadable PNG charts and, if useful, CSV summaries.
-- [ ] Make the site responsive for desktop and mobile.
-- [ ] Deploy the site using a hosting provider such as GitHub Pages.
+- [x] Add a `LICENSE` and contributor guidance if the repo is meant for wider sharing.
+- [x] Add a short project status section with the current analysis scope and known limitations.
+- [x] Include a screenshot or summary of the notebook outputs in the main documentation.
+- [x] Make sure file names and chart outputs match the README references exactly.
 
-## Instagram or social feed
+## Future public-facing features
 
-- [ ] Choose a consistent post format and visual identity.
-- [ ] Create square or vertical chart templates for social posts.
-- [ ] Generate a monthly or weekly Austin climate summary image.
-- [ ] Include the period, station, baseline, units, and source on every post.
-- [ ] Write concise captions explaining the result without overstating causation.
-- [ ] Decide whether posts will be published manually or through a scheduling workflow.
-- [ ] Test image readability on a phone before publishing.
-- [ ] Keep a content calendar for recurring topics and notable trends.
+- [x] Choose a lightweight web stack for a simple Austin climate landing page: static GitHub Pages site with HTML, CSS, and vanilla JavaScript.
+- [ ] Build a summary page with annual temperature anomaly findings.
+- [ ] Add annual nighttime low and summer nighttime low trend charts.
+- [ ] Add precipitation anomaly visuals and explanatory text.
+- [ ] Add unit toggles for Celsius/Fahrenheit if the site is user-facing.
+- [ ] Add source notes, baseline dates, station information, and data coverage details.
+- [ ] Prepare exportable PNG charts and CSV summaries for reuse in posts or presentations.
+- [ ] Design a social-media-friendly chart template for Austin climate summaries.
 
 ## Recommended order
 
-1. Finish repository cleanup and create the first GitHub commit.
-2. Add validation and reproducible chart-generation steps.
-3. Build the website from the existing chart outputs and analysis data.
-4. Reuse the website's chart-generation code for Instagram assets.
-5. Automate updates only after the manual workflow is reliable.
+1. Verify the repository works from a fresh Python environment.
+2. Clean up data validation and chart regeneration steps.
+3. Publish the repo to GitHub and confirm the docs still match the outputs.
+4. Build the simple website from the existing analysis outputs.
+5. Reuse the same charts for social-media assets once the manual workflow is stable.

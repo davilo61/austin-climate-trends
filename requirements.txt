@@ -2,3 +2,4 @@ pandas>=2.0
 matplotlib>=3.7
 seaborn>=0.13
 meteostat>=2.1
+pytest>=8.0
