@@ -18,7 +18,7 @@ def test_counts_100_degree_days_and_excludes_partial_years():
         }
     )
 
-    result = count_hot_days(weather)
+    result = count_hot_days(weather, end_year=2025)
 
     assert result.to_dict("records") == [
         {"year": 1986, "hot_days": 1},

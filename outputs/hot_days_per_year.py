@@ -1,3 +1,4 @@
+from datetime import date
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -7,16 +8,22 @@ import seaborn as sns
 
 THRESHOLD_C = (100 - 32) / 1.8
 START_YEAR = 1986
-END_YEAR = 2025
 
 
-def count_hot_days(weather: pd.DataFrame) -> pd.DataFrame:
+def last_complete_year(today: date | None = None) -> int:
+    """Return the most recently finished calendar year relative to today."""
+    return (today or date.today()).year - 1
+
+
+def count_hot_days(weather: pd.DataFrame, end_year: int | None = None) -> pd.DataFrame:
     """Count complete-year days with a daily maximum temperature of at least 100 F."""
+    if end_year is None:
+        end_year = last_complete_year()
     data = weather.copy()
     data["time"] = pd.to_datetime(data["time"], errors="coerce")
     data = data.dropna(subset=["time", "tmax"])
     data["year"] = data["time"].dt.year
-    data = data[data["year"].between(START_YEAR, END_YEAR)]
+    data = data[data["year"].between(START_YEAR, end_year)]
     data["is_hot_day"] = data["tmax"] >= THRESHOLD_C
 
     return (
@@ -26,7 +33,9 @@ def count_hot_days(weather: pd.DataFrame) -> pd.DataFrame:
     )
 
 
-def create_chart(yearly_hot_days: pd.DataFrame, output_path: Path) -> None:
+def create_chart(yearly_hot_days: pd.DataFrame, output_path: Path, end_year: int | None = None) -> None:
+    if end_year is None:
+        end_year = last_complete_year()
     sns.set_theme(style="whitegrid", context="notebook")
     fig, ax = plt.subplots(figsize=(11, 5.5))
     colors = ["#d66b4d" if value > 0 else "#2f6f95" for value in yearly_hot_days["hot_days"]]
@@ -44,7 +53,7 @@ def create_chart(yearly_hot_days: pd.DataFrame, output_path: Path) -> None:
         xlabel="Year",
         ylabel="Days with daily maximum temperature >= 100°F",
     )
-    ax.set_xlim(START_YEAR - 1, END_YEAR + 1)
+    ax.set_xlim(START_YEAR - 1, end_year + 1)
     ax.legend(frameon=False)
     fig.tight_layout()
     fig.savefig(output_path, dpi=180, bbox_inches="tight")
