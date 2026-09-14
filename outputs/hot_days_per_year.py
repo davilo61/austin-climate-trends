@@ -16,9 +16,9 @@ def last_complete_year(today: date | None = None) -> int:
 
 
 def count_hot_days(weather: pd.DataFrame, end_year: int | None = None) -> pd.DataFrame:
-    """Count complete-year days with a daily maximum temperature of at least 100 F."""
+    """Count days with a daily maximum temperature of at least 100 F, including the current partial year."""
     if end_year is None:
-        end_year = last_complete_year()
+        end_year = date.today().year
     data = weather.copy()
     data["time"] = pd.to_datetime(data["time"], errors="coerce")
     data = data.dropna(subset=["time", "tmax"])
@@ -26,20 +26,25 @@ def count_hot_days(weather: pd.DataFrame, end_year: int | None = None) -> pd.Dat
     data = data[data["year"].between(START_YEAR, end_year)]
     data["is_hot_day"] = data["tmax"] >= THRESHOLD_C
 
-    return (
+    result = (
         data.groupby("year", as_index=False)
         .agg(hot_days=("is_hot_day", "sum"))
         .astype({"year": int, "hot_days": int})
     )
+    result["is_partial"] = result["year"] > last_complete_year()
+    return result
 
 
 def create_chart(yearly_hot_days: pd.DataFrame, output_path: Path, end_year: int | None = None) -> None:
     if end_year is None:
-        end_year = last_complete_year()
+        end_year = int(yearly_hot_days["year"].max())
     sns.set_theme(style="whitegrid", context="notebook")
     fig, ax = plt.subplots(figsize=(11, 5.5))
+    is_partial = yearly_hot_days.get("is_partial", pd.Series(False, index=yearly_hot_days.index))
     colors = ["#d66b4d" if value > 0 else "#2f6f95" for value in yearly_hot_days["hot_days"]]
-    ax.bar(yearly_hot_days["year"], yearly_hot_days["hot_days"], color=colors, width=0.8, alpha=0.85)
+    hatches = ["///" if partial else None for partial in is_partial]
+    for year, value, color, hatch in zip(yearly_hot_days["year"], yearly_hot_days["hot_days"], colors, hatches):
+        ax.bar(year, value, color=color, width=0.8, alpha=0.6 if hatch else 0.85, hatch=hatch, edgecolor="#172a3a" if hatch else None)
     rolling_mean = yearly_hot_days["hot_days"].rolling(7, center=True).mean()
     ax.plot(
         yearly_hot_days["year"],
@@ -48,6 +53,8 @@ def create_chart(yearly_hot_days: pd.DataFrame, output_path: Path, end_year: int
         linewidth=2.5,
         label="7-year rolling mean",
     )
+    if is_partial.any():
+        ax.bar(0, 0, color="#999999", alpha=0.6, hatch="///", edgecolor="#172a3a", label="current year (partial, year-to-date)")
     ax.set(
         title="Austin annual number of 100°F days",
         xlabel="Year",
