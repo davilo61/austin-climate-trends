@@ -88,7 +88,7 @@ These values are a lightweight descriptive summary of the station record and sho
 
 ## 100°F days
 
-The project also counts days when the daily maximum temperature (`tmax`) reaches at least 100°F (37.78°C). The chart uses the 40 complete calendar years from 1986 through 2025; the available 2026 records are partial and are excluded from the annual comparison. Run `python outputs/hot_days_per_year.py` to regenerate it.
+The project also counts days when the daily maximum temperature (`tmax`) reaches at least 100°F (37.78°C). The chart covers 1986 through the present; the current, still-in-progress year is shown as a hatched "partial year" bar and is excluded from the rolling mean so it doesn't skew the trend. Run `python outputs/hot_days_per_year.py` to regenerate it.
 
 ## Planned website stack
 

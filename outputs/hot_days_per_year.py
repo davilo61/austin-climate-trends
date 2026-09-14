@@ -45,9 +45,11 @@ def create_chart(yearly_hot_days: pd.DataFrame, output_path: Path, end_year: int
     hatches = ["///" if partial else None for partial in is_partial]
     for year, value, color, hatch in zip(yearly_hot_days["year"], yearly_hot_days["hot_days"], colors, hatches):
         ax.bar(year, value, color=color, width=0.8, alpha=0.6 if hatch else 0.85, hatch=hatch, edgecolor="#172a3a" if hatch else None)
-    rolling_mean = yearly_hot_days["hot_days"].rolling(7, center=True).mean()
+    # Exclude the partial year so it doesn't skew the rolling mean toward an artificially low value.
+    complete = yearly_hot_days[~is_partial]
+    rolling_mean = complete["hot_days"].rolling(7, center=True).mean()
     ax.plot(
-        yearly_hot_days["year"],
+        complete["year"],
         rolling_mean,
         color="#172a3a",
         linewidth=2.5,
