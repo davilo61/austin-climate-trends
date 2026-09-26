@@ -13,6 +13,7 @@ A small, reproducible climate analysis project built around historical weather o
 - `outputs/tmin_anomalies.png`: Annual nighttime low temperature anomaly chart.
 - `outputs/tmin_nh_summer_anomalies.png`: Astronomical summer nighttime low anomaly chart.
 - `outputs/hot_days_per_year.png`: Annual count of days reaching at least 100°F.
+- `outputs/first_hot_day_per_year.png`: Date of the first 100°F day in each year.
 - `notebooks/austin_climate_exploration.ipynb`: Focused Austin climate exploration and trend analysis.
 
 ## Project status
@@ -51,7 +52,7 @@ To regenerate the exported charts in `outputs/`:
 
 1. Activate the project environment.
 2. Install dependencies with `pip install -r requirements.txt`.
-3. Run `python outputs/refresh_all.py`. It refreshes `data/austin_daily_weather.csv` first, then runs `notebooks/climate_analysis.ipynb` (without rewriting the notebook file), regenerates the annual 100°F-days chart, and copies the charts into `docs/assets/`.
+3. Run `python outputs/refresh_all.py`. It refreshes `data/austin_daily_weather.csv` first, then runs `notebooks/climate_analysis.ipynb` (without rewriting the notebook file), regenerates the 100°F-days and first-100°F-day charts, and copies the charts into `docs/assets/`.
 4. Confirm that the PNG outputs in `outputs/` and `docs/assets/` update after execution.
 
 The same pipeline runs automatically every day via the `Refresh data and charts` GitHub Actions workflow (`.github/workflows/refresh-data.yml`), which commits any updated data and charts. It can also be started manually from the Actions tab.
@@ -90,6 +91,10 @@ These values are a lightweight descriptive summary of the station record and sho
 
 The project also counts days when the daily maximum temperature (`tmax`) reaches at least 100°F (37.78°C). The chart covers 1986 through the present; the current, still-in-progress year is shown as a hatched "partial year" bar and is excluded from the rolling mean so it doesn't skew the trend. Run `python outputs/hot_days_per_year.py` to regenerate it.
 
+## First 100°F day of the year
+
+A companion chart plots the date of the first day each year with a daily maximum of at least 100°F, with a linear trend fitted over the years that reached 100°F (years that never did are marked separately and don't contribute a date). The current year is only treated as incomplete until its first 100°F day occurs; after that its date is final. Run `python outputs/first_hot_day_per_year.py` to regenerate it.
+
 ## Planned website stack
 
 The planned climate landing page will use a static GitHub Pages site built with HTML, CSS, and vanilla JavaScript. The existing PNG charts can be reused directly, and a static site keeps hosting and maintenance simple while leaving room for responsive layout, unit toggles, and lightweight chart interactions later.
@@ -122,5 +127,9 @@ The site includes a summary page, the annual temperature, nighttime-low, summer-
 ### Annual 100°F days
 
 ![Austin annual number of 100°F days](outputs/hot_days_per_year.png)
+
+### First 100°F day of the year
+
+![Austin first 100°F day of each year](outputs/first_hot_day_per_year.png)
 
 The notebook and companion chart scripts currently produce four documented visual outputs: annual temperature anomalies, precipitation anomalies, annual nighttime low anomalies, and annual counts of 100°F days. The summer nighttime-low chart is also retained as a focused analysis output. Together, these outputs summarize long-term temperature departures, nighttime warming, precipitation variability, and extreme-heat frequency.

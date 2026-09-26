@@ -34,8 +34,9 @@ def run_notebook() -> None:
     ).execute()
 
 
-def run_hot_days() -> None:
-    runpy.run_path(str(OUTPUTS_DIR / "hot_days_per_year.py"), run_name="__main__")
+def run_hot_day_charts() -> None:
+    for script in ("hot_days_per_year.py", "first_hot_day_per_year.py"):
+        runpy.run_path(str(OUTPUTS_DIR / script), run_name="__main__")
 
 
 def sync_docs_assets() -> None:
@@ -51,7 +52,7 @@ if __name__ == "__main__":
     retrieve_data()
     print("2/4 Running climate_analysis notebook", flush=True)
     run_notebook()
-    print("3/4 Regenerating 100°F days chart", flush=True)
-    run_hot_days()
+    print("3/4 Regenerating 100°F day charts", flush=True)
+    run_hot_day_charts()
     print("4/4 Syncing charts into docs/assets", flush=True)
     sync_docs_assets()
