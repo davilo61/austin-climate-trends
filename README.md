@@ -51,10 +51,10 @@ To regenerate the exported charts in `outputs/`:
 
 1. Activate the project environment.
 2. Install dependencies with `pip install -r requirements.txt`.
-3. Run `python outputs/retrieve_austin_data.py` to refresh `data/austin_daily_weather.csv`.
-4. Open `notebooks/climate_analysis.ipynb` and run all cells.
-5. Run `python outputs/hot_days_per_year.py` to regenerate the annual 100°F-days chart.
-6. Confirm that the PNG outputs in `outputs/` update after execution.
+3. Run `python outputs/refresh_all.py`. It refreshes `data/austin_daily_weather.csv` first, then runs `notebooks/climate_analysis.ipynb` (without rewriting the notebook file), regenerates the annual 100°F-days chart, and copies the charts into `docs/assets/`.
+4. Confirm that the PNG outputs in `outputs/` and `docs/assets/` update after execution.
+
+The same pipeline runs automatically every day via the `Refresh data and charts` GitHub Actions workflow (`.github/workflows/refresh-data.yml`), which commits any updated data and charts. It can also be started manually from the Actions tab.
 
 This workflow keeps the notebook, source data, and output charts aligned with each other.
 
