@@ -5,6 +5,6 @@ Austin is heating up. 🌡️ Four charts from 41 years of daily weather at Camp
 3️⃣ Nighttime lows are warming about 0.5°F per decade.
 4️⃣ The average annual temperature is warming about 0.4°F per decade.
 
-Data: Meteostat station 72254 (Austin Camp Mabry), through October 4, 2026.
+Data: Meteostat station 72254 (Austin Camp Mabry), through October 8, 2026.
 
 #Austin #ATX #AustinTexas #ClimateChange #Heat #Weather #DataViz #ClimateData #Texas
