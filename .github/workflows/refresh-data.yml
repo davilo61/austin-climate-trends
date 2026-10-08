@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
-          git add data/austin_daily_weather.csv outputs/*.png docs/assets/*.png
+          git add data/austin_daily_weather.csv outputs/*.png outputs/social docs/assets/*.png
           if git diff --cached --quiet; then
             echo "No data or chart changes."
           else

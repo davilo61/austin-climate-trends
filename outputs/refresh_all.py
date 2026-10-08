@@ -47,12 +47,18 @@ def sync_docs_assets() -> None:
             print(f"Synced {chart.relative_to(PROJECT_ROOT)}")
 
 
+def run_instagram_export() -> None:
+    runpy.run_path(str(OUTPUTS_DIR / "instagram_export.py"), run_name="__main__")
+
+
 if __name__ == "__main__":
-    print("1/4 Retrieving latest Austin weather data", flush=True)
+    print("1/5 Retrieving latest Austin weather data", flush=True)
     retrieve_data()
-    print("2/4 Running climate_analysis notebook", flush=True)
+    print("2/5 Running climate_analysis notebook", flush=True)
     run_notebook()
-    print("3/4 Regenerating 100°F day charts", flush=True)
+    print("3/5 Regenerating 100°F day charts", flush=True)
     run_hot_day_charts()
-    print("4/4 Syncing charts into docs/assets", flush=True)
+    print("4/5 Syncing charts into docs/assets", flush=True)
     sync_docs_assets()
+    print("5/5 Exporting Instagram slides to outputs/social", flush=True)
+    run_instagram_export()

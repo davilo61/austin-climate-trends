@@ -95,6 +95,10 @@ The project also counts days when the daily maximum temperature (`tmax`) reaches
 
 A companion chart plots the date of the first day each year with a daily maximum of at least 100°F, with a linear trend fitted over the years that reached 100°F (years that never did are marked separately and don't contribute a date). The current year is only treated as incomplete until its first 100°F day occurs; after that its date is final. Run `python outputs/first_hot_day_per_year.py` to regenerate it.
 
+## Instagram export
+
+`python outputs/instagram_export.py` writes a four-slide carousel to `outputs/social/`, each a 1080×1350 (4:5 portrait) PNG redrawn with large type for phones: days reaching 100°F, the first 100°F day of the year, nighttime-low anomalies, and annual temperature anomalies (in °F). It also writes `caption.txt` with a suggested caption whose numbers are computed from the current data. The export runs as the last step of `outputs/refresh_all.py`, so the daily workflow keeps the slides current; download them from `outputs/social/` on GitHub and post them as a carousel.
+
 ## Planned website stack
 
 The planned climate landing page will use a static GitHub Pages site built with HTML, CSS, and vanilla JavaScript. The existing PNG charts can be reused directly, and a static site keeps hosting and maintenance simple while leaving room for responsive layout, unit toggles, and lightweight chart interactions later.
